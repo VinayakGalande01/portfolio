@@ -1,7 +1,8 @@
 export const skills = [
-  { name: "Python", desc: "Core AI language" },
-  { name: "PyTorch", desc: "Deep learning framework" },
-  { name: "LangChain", desc: "LLM orchestration" },
+  { name: "Python", desc: "Core AI programming language." },
+  { name: "PyTorch", desc: "Deep learning framework." },
+  { name: "LangChain", desc: "LLM application framework." },
+  { name: "FastAPI", desc: "Backend framework for AI services." },
 ];
 
 export const projects = [
