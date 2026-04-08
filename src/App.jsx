@@ -1,16 +1,18 @@
 import Hero from "./sections/Hero";
 import Journey from "./sections/Journey";
-import TechStack from "./sections/TechStack";
 import Projects from "./sections/Projects";
+import Services from "./sections/Services";
+import Testimonials from "./sections/Testimonials";
 import Contact from "./sections/Contact";
 
 export default function App() {
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white selection:bg-primary selection:text-white">
       <Hero />
       <Journey />
-      <TechStack />
       <Projects />
+      <Services />
+      <Testimonials />
       <Contact />
     </div>
   );

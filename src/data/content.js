@@ -1,112 +1,144 @@
 export const skills = [
   {
     name: "Python",
-    subtitle: "Base Layer Protocol",
+    subtitle: "Creative Computing",
     version: "v3.12",
     efficiency: "98.4%",
     compatibility: "High",
     deployment: "Cloud",
     runtime: "ASync",
-    brief: "Leveraging Python for mission-critical automation and data orchestration. Our laboratory utilizes strict type-hinting and asynchronous patterns to ensure high-velocity throughput across distributed clusters.",
-    tags: ["Numpy_Refraction", "Pandas_Stream", "Scikit_Learn", "PyTest_Sig"],
+    brief: "Leveraging Python for generative systems and data-driven design. Utilizing asynchronous patterns to power high-fidelity visual experiments and automated workflows.",
+    tags: ["Generative_Systems", "Data_Visualization", "Automation", "Workflow_Design"],
     icon: "🐍",
   },
   {
     name: "PyTorch",
-    subtitle: "Tensor Computation",
+    subtitle: "Neural Aesthetics",
     version: "v2.3",
     efficiency: "96.1%",
     compatibility: "High",
     deployment: "GPU",
     runtime: "CUDA",
-    brief: "Deep learning tensor operations for neural network training and inference. Optimized for distributed GPU clusters with automatic differentiation and dynamic computation graphs.",
-    tags: ["TorchVision", "Lightning_Core", "ONNX_Export", "Tensor_Ops"],
+    brief: "Exploring the intersection of deep learning and visual art. Training custom models to generate unique aesthetic patterns and adaptive interfaces.",
+    tags: ["Neural_Art", "Pattern_Recognition", "Latent_Spaces", "Optimization"],
     icon: "🔥",
   },
   {
-    name: "LangChain",
-    subtitle: "Agent Orchestration",
-    version: "v0.2",
-    efficiency: "94.7%",
-    compatibility: "Medium",
-    deployment: "Hybrid",
-    runtime: "Event",
-    brief: "Orchestrating autonomous AI agents with chain-of-thought reasoning. Manages tool selection, memory retrieval, and multi-step task decomposition for complex workflows.",
-    tags: ["Agent_Core", "RAG_Pipeline", "Vector_Store", "Tool_Chain"],
-    icon: "🔗",
-  },
-  {
-    name: "FastAPI",
-    subtitle: "High Performance I/O",
-    version: "v0.111",
+    name: "React / JS",
+    subtitle: "Interactive Systems",
+    version: "v19.0",
     efficiency: "99.2%",
     compatibility: "High",
-    deployment: "Docker",
-    runtime: "ASGI",
-    brief: "High-performance API layer for serving AI models at scale. Handles concurrent requests with automatic OpenAPI documentation and real-time WebSocket streaming.",
-    tags: ["Pydantic_V2", "Uvicorn_Core", "OAuth_Layer", "WebSocket_IO"],
+    deployment: "Vercel",
+    runtime: "Client",
+    brief: "Building fluid, highly responsive user experiences. Focusing on the technical execution of minimalist design principles and smooth micro-interactions.",
+    tags: ["Minimalist_UI", "Motion_Design", "Component_Architecture", "State_Logic"],
     icon: "⚡",
+  },
+  {
+    name: "GSAP / Framer",
+    subtitle: "Motion Engineering",
+    version: "v3.12",
+    efficiency: "94.7%",
+    compatibility: "High",
+    deployment: "Browser",
+    runtime: "Smooth",
+    brief: "Orchestrating complex animation sequences that feel organic. Specializing in scroll-triggered narratives and liquid-smooth transitions.",
+    tags: ["Scroll_Trigger", "Liquid_Motion", "Timeline_Control", "SVG_Animation"],
+    icon: "🌀",
   },
 ];
 
 
 export const projects = [
   {
-    name: "AI Agent System",
-    desc: "Autonomous multi-agent orchestration system utilizing recursive feed-back loops for rapid adaptive refinement.",
-    tech: ["Python", "LangChain"],
-    level: 80,
-    apparatus: "01",
-    complexityLabel: "80/100",
+    name: "Redefining",
+    desc: "Mobile interface design for high-performance financial systems.",
+    tech: ["UI/UX", "Mobile"],
+    category: "UX / UI",
+    image: "/mockups/project1.png"
   },
   {
-    name: "Data Siphon",
-    desc: "High throughput ingestion pipeline for artifact-level telemetry extraction, normalizing entries for archival distance.",
-    tech: ["FastAPI", "LLM"],
-    level: 45,
-    apparatus: "02",
-    complexityLabel: "45/100",
+    name: "30 Days of Design",
+    desc: "A creative challenge exploring typography and motion physics.",
+    tech: ["Branding", "Motion"],
+    category: "DESIGN",
+    image: "/mockups/project2.png"
   },
   {
-    name: "Quantum Ledger",
-    desc: "Predictive protocol utilizing zero-knowledge proof chains verified for indefinite traverse from the field.",
-    tech: ["Python", "Data Science"],
-    level: 90,
-    apparatus: "03",
-    complexityLabel: "90/100",
+    name: "Resonance",
+    desc: "Experimental audio-visual interface using neural oscillators.",
+    tech: ["AI", "Web Exp"],
+    category: "APP",
+    image: "/mockups/project3.png"
   },
   {
-    name: "Kinetic UI",
-    desc: "A motion system framework predicated on a blackout composition and sub-atomic interaction principles.",
-    tech: ["React", "GSAP"],
-    level: 65,
-    apparatus: "04",
-    complexityLabel: "65/100",
+    name: "Elevate",
+    desc: "Corporate branding and digital scalability guidelines.",
+    tech: ["Systems", "Identity"],
+    category: "LOGO",
+    image: "/mockups/project4.png"
   },
 ];
 
+export const services = [
+  {
+    id: "01",
+    title: "AI Strategy & Automation",
+    desc: "Optimizing workflows through custom neural architectures and automated data pipelines."
+  },
+  {
+    id: "02",
+    title: "Product Design",
+    desc: "High-fidelity mobile and web interfaces predicated on minimalist principles."
+  },
+  {
+    id: "03",
+    title: "Web Experiences",
+    desc: "Engaging, motion-rich digital narratives that drive conversion and brand depth."
+  },
+  {
+    id: "04",
+    title: "Brand Identity",
+    desc: "Strategic visual systems for forward-thinking technology companies."
+  }
+];
+
+export const testimonials = [
+  {
+    quote: "Vinayak's ability to translate complex AI concepts into fluid visual experiences is unparalleled.",
+    author: "Alex Rivers",
+    role: "CEO, NexaSystems"
+  },
+  {
+    quote: "The attention to detail in the motion systems and overall UX significantly improved our product metrics.",
+    author: "Sarah Chen",
+    role: "Product Lead, Fluxo"
+  },
+  {
+    quote: "A true creative engineer. The technical depth combined with design intuition is exactly what we needed.",
+    author: "James Holt",
+    role: "Founder, Aris Lab"
+  },
+  {
+    quote: "The final deliverable exceeded all expectations. Strategic, bold, and technically flawless.",
+    author: "Elena Vance",
+    role: "Design Director, Zenith"
+  }
+];
 
 export const contacts = [
   {
-    name: "GitHub",
-    link: "https://github.com/yourusername",
-    desc: "Access open-source repositories and development logs for ongoing obsidian projects.",
-    action: "View Repositories",
-    icon: "code",
-  },
-  {
     name: "LinkedIn",
     link: "https://linkedin.com/in/yourprofile",
-    desc: "Establish a professional bridge for career networking and laboratory updates.",
-    action: "Connect Signal",
-    icon: "link",
+  },
+  {
+    name: "GitHub",
+    link: "https://github.com/yourusername",
   },
   {
     name: "Email",
-    link: "mailto:your@email.com",
-    desc: "Direct encrypted communication for collaboration requests and deep-level inquiries.",
-    action: "Send Email",
-    icon: "mail",
+    link: "mailto:vinayakpgalande90@gmail.com",
   },
 ];
 
