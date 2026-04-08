@@ -22,7 +22,7 @@ export default function TechStack() {
       <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl gap-10">
 
         {/* Funnel (Left) */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-6">
           {skills.map((skill, i) => (
             <div
               key={i}
@@ -30,8 +30,8 @@ export default function TechStack() {
               onClick={() => setActive(skill)}
               onKeyDown={(e) => e.key === "Enter" && setActive(skill)}
               className={`
-                skill-node w-14 h-14 rounded-full flex items-center justify-center cursor-pointer transition
-                ${active.name === skill.name ? "bg-blue-600 scale-110 shadow-2xl" : "bg-blue-500"}
+                skill-node w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 border-2 font-bold text-xl
+                ${active.name === skill.name ? "bg-blue-600 border-blue-400 scale-110 shadow-[0_0_20px_rgba(59,130,246,0.5)]" : "bg-gray-800 border-gray-700 hover:border-gray-500"}
               `}
             >
               {skill.name[0]}
@@ -40,9 +40,12 @@ export default function TechStack() {
         </div>
 
         {/* Info Panel (Right) */}
-        <div className="max-w-md text-center md:text-left">
-          <h2 className="text-3xl font-bold">{active.name}</h2>
-          <p className="mt-4 text-gray-300">{active.desc}</p>
+        <div className="max-w-lg text-center md:text-left bg-gray-900/40 p-8 rounded-2xl border border-white/5 backdrop-blur-sm">
+          <h2 className="text-4xl font-extrabold text-white tracking-tight">{active.name}</h2>
+          <div className="w-12 h-1 bg-blue-500 mt-2 mb-6 rounded-full mx-auto md:mx-0"></div>
+          <p className="text-xl text-gray-300 leading-relaxed max-w-md italic">
+            "{active.desc}"
+          </p>
         </div>
 
       </div>
