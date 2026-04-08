@@ -1,11 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Hero() {
   const containerRef = useRef();
   const cursorRef = useRef();
   const cursorPos = useRef({ x: 0, y: 0 });
   const targetPos = useRef({ x: 0, y: 0 });
+  const [navVisible, setNavVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setNavVisible(false);
+      } else {
+        setNavVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const cursor = cursorRef.current;
@@ -31,7 +49,7 @@ export default function Hero() {
     };
     animate();
 
-    // Cursor hover scale on interactive elements
+    // Cursor hover scale Check for interactive elements
     const interactiveEls = document.querySelectorAll("a, button, [data-hover]");
     const onEnter = () => cursor.classList.add("hovering");
     const onLeave = () => cursor.classList.remove("hovering");
@@ -85,33 +103,53 @@ export default function Hero() {
     };
   }, []);
 
+  // Magnetic Button State
+  const [magneticPos, setMagneticPos] = useState({ x: 0, y: 0 });
+  const handleMagnetic = (e) => {
+    const { clientX, clientY, currentTarget } = e;
+    const { left, top, width, height } = currentTarget.getBoundingClientRect();
+    const x = clientX - (left + width / 2);
+    const y = clientY - (top + height / 2);
+    setMagneticPos({ x: x * 0.3, y: y * 0.3 });
+  };
+
   return (
     <>
       {/* Custom Cursor */}
       <div ref={cursorRef} className="custom-cursor hidden md:block" />
 
-      {/* Sticky Navigation */}
-      <nav className="nav-sticky px-6 md:px-20 py-5 flex justify-between items-center">
-        <a href="#" className="text-lg font-header tracking-tight">
-          VINAYAK
-        </a>
-        <div className="hidden md:flex items-center gap-10">
-          {["About", "Projects", "Contact"].map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
-              className="text-[13px] font-medium text-muted hover:text-white transition-opacity duration-300 uppercase tracking-widest"
-            >
-              {link}
+      {/* Sticky Navigation (Hide on scroll down, Show on scroll up) */}
+      <AnimatePresence>
+        {navVisible && (
+          <motion.nav
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            exit={{ y: -100 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="nav-sticky px-6 md:px-20 py-5 flex justify-between items-center"
+          >
+            <a href="#" className="text-lg font-header tracking-tight">
+              VINAYAK
             </a>
-          ))}
-        </div>
-        {/* Mobile menu icon */}
-        <button className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5">
-          <span className="w-6 h-[1.5px] bg-white"></span>
-          <span className="w-4 h-[1.5px] bg-white"></span>
-        </button>
-      </nav>
+            <div className="hidden md:flex items-center gap-10">
+              {["About", "Projects", "Contact"].map((link) => (
+                <a
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  className="text-[13px] font-medium text-muted hover:text-white transition-opacity duration-300 uppercase tracking-widest"
+                >
+                  {link}
+                </a>
+              ))}
+            </div>
+            {/* Mobile menu icon */}
+            <button className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5">
+              <span className="w-6 h-[1.5px] bg-white"></span>
+              <span className="w-4 h-[1.5px] bg-white"></span>
+            </button>
+          </motion.nav>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section
@@ -141,18 +179,22 @@ export default function Hero() {
             </p>
 
             <div className="flex items-center gap-6 mt-4">
-              <a
+              <motion.a
                 href="#contact"
                 data-hover
+                onMouseMove={handleMagnetic}
+                onMouseLeave={() => setMagneticPos({ x: 0, y: 0 })}
+                animate={{ x: magneticPos.x, y: magneticPos.y }}
+                transition={{ type: "spring", stiffness: 150, damping: 15 }}
                 className="inline-flex items-center gap-3 bg-white text-black px-7 py-3.5 rounded-full text-[12px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-500"
               >
                 Let's Talk
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </a>
+              </motion.a>
               <a
-                href="#work"
+                href="#projects"
                 className="text-[12px] font-semibold text-muted uppercase tracking-widest hover:text-white transition-colors duration-300 underline underline-offset-4 decoration-white/20 hover:decoration-white"
               >
                 View Work

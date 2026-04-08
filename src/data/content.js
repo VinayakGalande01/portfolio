@@ -47,6 +47,87 @@ export const skills = [
     tags: ["Scroll_Trigger", "Liquid_Motion", "Timeline_Control", "SVG_Animation"],
     icon: "🌀",
   },
+  {
+    name: "FastAPI",
+    subtitle: "High-Performance APIs",
+    version: "v0.111",
+    efficiency: "99.8%",
+    brief: "Developing ultra-fast, modern Python web frameworks for high-concurrency AI deployments and data services.",
+    tags: ["Async_Backend", "Type_Safety", "RESTful", "Performance"],
+    icon: "🚀"
+  },
+  {
+    name: "LangChain",
+    subtitle: "LLM Orchestration",
+    version: "v0.2",
+    efficiency: "95.5%",
+    brief: "Building complex chains and agents to harness the power of Large Language Models for cognitive enterprise workflows.",
+    tags: ["LLM_Ops", "Cognitive_Chains", "RAG", "Agentic_AI"],
+    icon: "🦜"
+  },
+  {
+    name: "LLMs / RAG",
+    subtitle: "Cognitive Engine",
+    version: "GPT-4 / Claude-3",
+    efficiency: "97.2%",
+    brief: "Implementing Retrieval-Augmented Generation architectures to ground conversational AI in proprietary data sources.",
+    tags: ["Knowledge_Retrieval", "Context_Inject", "Prompt_Eng", "Vector_Search"],
+    icon: "🧠"
+  },
+  {
+    name: "Hugging Face",
+    subtitle: "Model Deployment",
+    version: "v4.41",
+    efficiency: "96.8%",
+    brief: "Fine-tuning and deploying state-of-the-art open-source models for specialized NLP and vision tasks.",
+    tags: ["Open_Source", "Fine_Tuning", "Transformers", "Pipelines"],
+    icon: "🤗"
+  },
+  {
+    name: "FAISS / Vector DB",
+    subtitle: "Semantic Recall",
+    version: "v1.8",
+    efficiency: "99.9%",
+    brief: "Optimizing high-dimensional vector similarity search for millisecond retrieval in large-scale RAG systems.",
+    tags: ["Vector_Search", "Sim_Search", "Embeddings", "Indexing"],
+    icon: "🔍"
+  },
+  {
+    name: "TensorFlow",
+    subtitle: "Deep Learning",
+    version: "v2.16",
+    efficiency: "94.2%",
+    brief: "Training robust neural network architectures for production-grade computer vision and predictive modeling.",
+    tags: ["Keras", "Model_Optim", "TFLite", "Graph_Comp"],
+    icon: "📊"
+  },
+  {
+    name: "Scikit-learn",
+    subtitle: "ML Frameworks",
+    version: "v1.5",
+    efficiency: "98.1%",
+    brief: "Utilizing classical machine learning algorithms for efficient data classification, regression, and clustering.",
+    tags: ["Statistical_Learning", "Preprocessing", "Evaluation", "Pipelines"],
+    icon: "⚙️"
+  },
+  {
+    name: "Pandas / NumPy",
+    subtitle: "Data Science",
+    version: "v2.2",
+    efficiency: "100%",
+    brief: "Processing massive datasets with vectorized operations for high-fidelity data analysis and feature engineering.",
+    tags: ["Matrix_Ops", "Data_Wrangling", "Analysis", "ETL"],
+    icon: "📈"
+  },
+  {
+    name: "REST APIs",
+    subtitle: "System Integration",
+    version: "GraphQL / REST",
+    efficiency: "99.5%",
+    brief: "Architecting scalable integration layers between intelligent backends and modern frontend interfaces.",
+    tags: ["API_Design", "Security", "Scalability", "Documentation"],
+    icon: "🔗"
+  }
 ];
 
 

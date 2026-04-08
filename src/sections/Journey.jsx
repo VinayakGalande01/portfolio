@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { projects } from "../data/content";
+import { skills } from "../data/content";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,6 +29,9 @@ export default function Journey() {
 
   const text = "With years of experience across various industries, my portfolio speaks to the diversity and versatility of my work";
 
+  // Duplicate skills for a dense, seamless ticker
+  const tickerItems = [...skills, ...skills, ...skills, ...skills];
+
   return (
     <section
       ref={sectionRef}
@@ -52,20 +55,17 @@ export default function Journey() {
         </h2>
       </div>
 
-      {/* Infinite Project Marquee */}
-      <div className="relative w-full overflow-hidden py-8 border-t border-b border-white/5">
-        <div className="marquee-track gap-6">
-          {[...projects, ...projects, ...projects, ...projects].map((p, i) => (
-            <div
-              key={i}
-              className="flex-shrink-0 w-[320px] md:w-[400px] aspect-video rounded-container overflow-hidden bg-surface border border-white/10 mx-3 group"
-            >
-              <img
-                src={p.image}
-                alt={p.name}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
-                loading="lazy"
-              />
+      {/* Infinite Tech Stack Ticker */}
+      <div className="relative w-full overflow-hidden py-10 border-t border-b border-white/5 bg-white/[0.01]">
+        <div className="marquee-track flex items-center">
+          {tickerItems.map((skill, i) => (
+            <div key={i} className="flex items-center">
+              <span className={`text-[clamp(3rem,8vw,6rem)] font-header tracking-tighter px-8 whitespace-nowrap ${
+                i % 2 === 0 ? "text-white" : "text-stroke opacity-50"
+              }`}>
+                {skill.name}
+              </span>
+              <span className="text-primary text-4xl mx-4">·</span>
             </div>
           ))}
         </div>
