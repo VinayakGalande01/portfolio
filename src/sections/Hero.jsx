@@ -162,9 +162,9 @@ export default function Hero() {
 
           {/* Right: Portrait */}
           <div className="hero-image order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-[280px] h-[360px] md:w-[420px] md:h-[540px] rounded-container overflow-hidden bg-surface border border-white/10">
+            <div className="relative w-[280px] h-[360px] md:w-[420px] md:h-[540px] rounded-full overflow-hidden bg-surface border border-white/10">
               <img
-                src="/avatar.png"
+                src="/Vinayak.png"
                 alt="Vinayak Galande"
                 className="w-full h-full object-cover"
                 loading="eager"
