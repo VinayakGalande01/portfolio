@@ -9,14 +9,15 @@ export default function Contact() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".footer-email", {
-        y: 100,
+      gsap.from(".contact-reveal", {
+        y: 50,
         opacity: 0,
-        duration: 1.5,
+        stagger: 0.12,
+        duration: 1.4,
         ease: "power4.out",
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%",
+          start: "top 75%",
         }
       });
     }, containerRef);
@@ -25,52 +26,64 @@ export default function Contact() {
   }, []);
 
   return (
-    <footer 
+    <footer
       ref={containerRef}
       id="contact"
-      className="relative min-h-screen bg-black text-white flex flex-col items-center justify-center pt-32 pb-12 overflow-hidden px-8"
+      className="bg-black text-white px-6 md:px-20 pt-32 pb-12"
     >
-      <div className="relative z-10 text-center flex flex-col items-center">
-        <h2 className="text-8xl md:text-[12rem] font-header leading-none uppercase tracking-tighter mb-12">
-          Contact
-        </h2>
-        
-        {/* Arched Footer Image */}
-        <div className="w-[300px] h-[380px] md:w-[450px] md:h-[580px] arch-container bg-primary/20 relative z-20 overflow-hidden shadow-[0_-50px_100px_-20px_rgba(255,77,0,0.2)]">
-           <img 
-            src="/avatar.png" 
-            alt="Contact Portrait" 
-            className="w-full h-full object-cover grayscale brightness-75 hover:brightness-100 transition-all duration-1000"
-           />
+      <div className="max-w-[1400px] mx-auto">
+        {/* Main CTA area */}
+        <div className="text-center mb-32">
+          <p className="contact-reveal text-[11px] font-semibold text-muted uppercase tracking-[0.3em] mb-8">
+            Let's work together
+          </p>
+
+          <h2 className="contact-reveal text-[clamp(2.5rem,8vw,7rem)] font-header leading-[0.9] tracking-tight mb-10">
+            Got a project <br />
+            <span className="text-muted">in mind?</span>
+          </h2>
+
+          <a
+            href="mailto:vinayakpgalande90@gmail.com"
+            data-hover
+            className="contact-reveal inline-flex items-center gap-4 bg-white text-black px-10 py-4 rounded-full text-[12px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-500"
+          >
+            Get in Touch
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
         </div>
 
-        {/* Massive Overlapping Email */}
-        <div className="footer-email relative -mt-32 md:-mt-52 z-30">
-          <a 
-            href="mailto:vinayakpgalande90@gmail.com" 
-            className="text-[8vw] md:text-[8vw] font-header leading-[0.8] tracking-tighter uppercase whitespace-nowrap hover:text-primary transition-colors"
+        {/* Large email */}
+        <div className="contact-reveal text-center mb-24">
+          <a
+            href="mailto:vinayakpgalande90@gmail.com"
+            className="text-[clamp(1rem,3.5vw,2.5rem)] font-header tracking-tight text-muted hover:text-primary transition-colors duration-500 break-all"
           >
             vinayakpgalande90@gmail.com
           </a>
         </div>
-      </div>
 
-      {/* Bottom Nav */}
-      <div className="w-full max-w-7xl flex flex-col md:flex-row justify-between items-center gap-12 mt-32 border-t border-white/10 pt-12 relative z-40">
-        <div className="flex gap-8 uppercase text-[10px] font-bold tracking-[0.3em]">
-          <a href="#" className="hover:text-primary transition-colors">LinkedIn</a>
-          <a href="#" className="hover:text-primary transition-colors">GitHub</a>
-          <a href="#" className="hover:text-primary transition-colors">Medium</a>
-          <a href="#" className="hover:text-primary transition-colors">Behance</a>
+        {/* Bottom bar */}
+        <div className="contact-reveal flex flex-col md:flex-row justify-between items-center gap-8 border-t border-white/10 pt-8">
+          <div className="flex gap-8">
+            {["LinkedIn", "GitHub", "Behance", "Medium"].map(link => (
+              <a
+                key={link}
+                href="#"
+                className="text-[11px] font-semibold text-muted uppercase tracking-widest hover:text-white transition-colors duration-300"
+              >
+                {link}
+              </a>
+            ))}
+          </div>
+
+          <p className="text-[11px] text-muted/60 uppercase tracking-widest">
+            © 2024 Vinayak Galande. All rights reserved.
+          </p>
         </div>
-
-        <div className="text-[10px] uppercase font-bold tracking-widest opacity-40">
-           © 2024 Design by Vinayak. Made with Passion.
-        </div>
       </div>
-
-      {/* Background Decorative Element */}
-      <div className="absolute bottom-0 left-0 w-full h-[50vh] bg-gradient-to-t from-primary/10 to-transparent pointer-events-none"></div>
     </footer>
   );
 }

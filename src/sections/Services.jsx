@@ -10,12 +10,12 @@ export default function Services() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".service-item", {
-        x: -50,
+      gsap.from(".service-row", {
+        y: 40,
         opacity: 0,
-        stagger: 0.2,
-        duration: 1,
-        ease: "power3.out",
+        stagger: 0.15,
+        duration: 1.2,
+        ease: "expo.out",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 70%",
@@ -27,30 +27,36 @@ export default function Services() {
   }, []);
 
   return (
-    <section 
+    <section
       ref={containerRef}
       id="services"
-      className="bg-black text-white px-8 md:px-24 py-32"
+      className="bg-black text-white px-6 md:px-20 py-32"
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-24">
-        <div className="md:w-1/3">
-          <h2 className="text-5xl font-header leading-none uppercase tracking-tighter">
-            What <br/> I Offer
-          </h2>
-        </div>
+      <div className="max-w-[1400px] mx-auto">
+        <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-header leading-[0.95] tracking-tight mb-24">
+          What I Offer
+        </h2>
 
-        <div className="md:w-2/3 space-y-16">
+        <div className="space-y-0">
           {services.map((s) => (
-            <div key={s.id} className="service-item group flex gap-12 border-t border-white/10 pt-12 cursor-default">
-              <span className="text-primary font-header text-sm mt-1">{s.id}</span>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-header uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-500">
-                  {s.title}
-                </h3>
-                <p className="text-muted text-sm leading-loose max-w-lg">
-                  {s.desc}
-                </p>
-              </div>
+            <div
+              key={s.id}
+              className="service-row group grid grid-cols-[60px_1fr] md:grid-cols-[80px_280px_1fr] gap-6 md:gap-12 py-10 border-b border-white/10 items-start cursor-default hover:bg-white/[0.02] transition-colors duration-500 -mx-4 px-4 rounded-lg"
+            >
+              {/* Index */}
+              <span className="text-[clamp(2rem,3vw,3.5rem)] font-header leading-none text-white/20 group-hover:text-primary transition-colors duration-500">
+                {s.id}
+              </span>
+
+              {/* Title */}
+              <h3 className="text-xl md:text-2xl font-header tracking-tight leading-tight group-hover:translate-x-2 transition-transform duration-500">
+                {s.title}
+              </h3>
+
+              {/* Description (hidden on small mobile) */}
+              <p className="hidden md:block text-sm text-muted leading-relaxed max-w-md self-center">
+                {s.desc}
+              </p>
             </div>
           ))}
         </div>

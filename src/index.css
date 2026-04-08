@@ -1,20 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════ */
 :root {
   --primary: #FF4D00;
   --bg: #000000;
+  --surface: #0A0A0A;
   --text: #FFFFFF;
-  --text-muted: #666666;
-  --font-header: 'Anton', sans-serif;
+  --text-muted: #A1A1A1;
+  --border: rgba(255, 255, 255, 0.1);
+  --radius: 24px;
+  --font-header: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
 
+/* ═══════════════════════════════════════
+   BASE RESET
+   ═══════════════════════════════════════ */
 * {
   cursor: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -22,62 +33,113 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* ═══════════════════════════════════════
+   CUSTOM CURSOR (with inertia via GSAP)
+   ═══════════════════════════════════════ */
 .custom-cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   background: var(--primary);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99999;
   mix-blend-mode: difference;
-  transform: translate(-50%, -50%); /* Centering on coordinate */
+  transform: translate(-50%, -50%);
   will-change: transform;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.custom-cursor.hovering {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 77, 0, 0.3);
+}
+
+/* ═══════════════════════════════════════
+   TYPOGRAPHY UTILITIES
+   ═══════════════════════════════════════ */
 .font-header {
   font-family: var(--font-header);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
-  line-height: 0.8;
-  font-weight: 900;
-}
-
-.hero-title {
-  font-size: clamp(3rem, 10vw, 12rem);
-  line-height: 0.8;
-  letter-spacing: -0.06em;
-  color: #FFFFFF;
+  font-weight: 800;
 }
 
 .text-stroke {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
   color: transparent;
 }
 
-.outline-text {
-  -webkit-text-stroke: 1.5px white;
-  color: transparent;
+/* ═══════════════════════════════════════
+   SCROLL REVEAL (Fade-In-Up)
+   ═══════════════════════════════════════ */
+.reveal-element {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
-/* Arched Shape Utiltiy */
-.arch-mask {
-  clip-path: ellipse(50% 100% at 50% 100%);
+.reveal-element.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1),
+              transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.arch-container {
-  border-radius: 999px 999px 0 0;
-  overflow: hidden;
+/* ═══════════════════════════════════════
+   INFINITE MARQUEE
+   ═══════════════════════════════════════ */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-.arch-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.marquee-track {
+  display: flex;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ═══════════════════════════════════════
+   STICKY NAV
+   ═══════════════════════════════════════ */
+.nav-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE UTILITIES
+   ═══════════════════════════════════════ */
+@media (max-width: 800px) {
+  .bento-grid {
+    grid-template-columns: 1fr !important;
+  }
 }

@@ -8,11 +8,19 @@ export default {
     extend: {
       colors: {
         primary: "#FF4D00",
-        muted: "#666666",
+        surface: "#0A0A0A",
+        muted: "#A1A1A1",
+        border: "rgba(255, 255, 255, 0.1)",
       },
       fontFamily: {
-        header: ["Anton", "sans-serif"],
+        header: ['"Plus Jakarta Sans"', "sans-serif"],
         body: ["Inter", "sans-serif"],
+      },
+      borderRadius: {
+        container: "24px",
+      },
+      screens: {
+        'bento': '800px',
       },
     },
   },

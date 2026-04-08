@@ -7,7 +7,7 @@ import Contact from "./sections/Contact";
 
 export default function App() {
   return (
-    <div className="bg-black text-white selection:bg-primary selection:text-white">
+    <div className="bg-black text-white">
       <Hero />
       <Journey />
       <Projects />
