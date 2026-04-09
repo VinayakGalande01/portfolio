@@ -1,76 +1,75 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 
 // INTERACTIVE COMPONENT: AgentNode Network (Enhanced)
 const AgentNetwork = () => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [nodes, setNodes] = useState([]);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Use springs for high-end smoothness and performance
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20, mass: 0.5 });
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20, mass: 0.5 });
+
+  // Generate nodes only once
+  const nodes = useMemo(() => Array.from({ length: 20 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 2 + 1,
+    delay: Math.random() * 5
+  })), []);
   
   useEffect(() => {
-    // Generate 20 randomized nodes for complex neural feel
-    const newNodes = Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 2 + 1,
-      delay: Math.random() * 5
-    }));
-    setNodes(newNodes);
-
     const handleMouseMove = (e) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
-      setMousePos({
-        x: (clientX - innerWidth / 2) * 0.05,
-        y: (clientY - innerHeight / 2) * 0.05,
-      });
+      mouseX.set((clientX - innerWidth / 2) * 0.08);
+      mouseY.set((clientY - innerHeight / 2) * 0.08);
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [mouseX, mouseY]);
 
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-80">
       <svg className="w-full h-full">
-        {/* Draw connections for nodes within 25% distance */}
-        {nodes.map((node, i) => 
-          nodes.slice(i + 1).map((target) => {
-            const dist = Math.hypot(node.x - target.x, node.y - target.y);
-            if (dist > 25) return null;
-            return (
-              <motion.line
-                key={`${node.id}-${target.id}`}
-                x1={`${node.x}%`} y1={`${node.y}%`}
-                x2={`${target.x}%`} y2={`${target.y}%`}
-                animate={{
-                  translateX: mousePos.x,
-                  translateY: mousePos.y
-                }}
-                stroke="#FF4D00"
-                strokeWidth="0.8"
-                strokeOpacity={0.7 * (1 - dist / 25)}
-              />
-            );
-          })
-        )}
-        {nodes.map((node) => (
-          <motion.circle
-            key={node.id}
-            cx={`${node.x}%`}
-            cy={`${node.y}%`}
-            r={node.size + 0.5}
-            fill="white"
-            initial={{ opacity: 0.4 }}
-            animate={{
-              translateX: mousePos.x,
-              translateY: mousePos.y,
-              opacity: [0.4, 0.9, 0.4]
-            }}
-            transition={{
-              opacity: { duration: 3, repeat: Infinity, delay: node.delay, ease: "easeInOut" }
-            }}
-          />
-        ))}
+        <motion.g style={{ x: springX, y: springY }}>
+          {/* Draw connections for nodes within 25% distance */}
+          {nodes.map((node, i) => 
+            nodes.slice(i + 1).map((target) => {
+              const dist = Math.hypot(node.x - target.x, node.y - target.y);
+              if (dist > 25) return null;
+              return (
+                <line
+                  key={`${node.id}-${target.id}`}
+                  x1={`${node.x}%`} 
+                  y1={`${node.y}%`}
+                  x2={`${target.x}%`} 
+                  y2={`${target.y}%`}
+                  stroke="#FF4D00"
+                  strokeWidth="0.8"
+                  strokeOpacity={0.7 * (1 - dist / 25)}
+                />
+              );
+            })
+          )}
+          {nodes.map((node) => (
+            <motion.circle
+              key={node.id}
+              cx={`${node.x}%`}
+              cy={`${node.y}%`}
+              r={node.size + 0.5}
+              fill="white"
+              initial={{ opacity: 0.4 }}
+              animate={{
+                opacity: [0.4, 0.9, 0.4]
+              }}
+              transition={{
+                opacity: { duration: 3, repeat: Infinity, delay: node.delay, ease: "easeInOut" }
+              }}
+            />
+          ))}
+        </motion.g>
       </svg>
     </div>
   );

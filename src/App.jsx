@@ -1,19 +1,14 @@
-import Hero from "./sections/Hero";
-import Journey from "./sections/Journey";
-import Projects from "./sections/Projects";
-import Services from "./sections/Services";
-import Testimonials from "./sections/Testimonials";
-import Contact from "./sections/Contact";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import ProjectDetail from "./pages/ProjectDetail";
 
 export default function App() {
   return (
-    <div className="bg-black text-white">
-      <Hero />
-      <Journey />
-      <Projects />
-      <Services />
-      <Testimonials />
-      <Contact />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/project/:id" element={<ProjectDetail />} />
+      </Routes>
+    </Router>
   );
 }

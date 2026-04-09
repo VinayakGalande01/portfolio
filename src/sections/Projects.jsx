@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { projects } from "../data/content";
 
 export default function Projects() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0); // 1 = Forward, -1 = Backward
   const [isAnimating, setIsAnimating] = useState(false);
+  const navigate = useNavigate();
 
   // Navigation Logic with prompt gate release
   const handleNext = () => {
@@ -20,6 +22,10 @@ export default function Projects() {
     setIsAnimating(true);
     setDirection(-1);
     setIndex((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
+  const navigateToProject = (id) => {
+    navigate(`/project/${id}`);
   };
 
   useEffect(() => {
@@ -133,47 +139,50 @@ export default function Projects() {
               custom={direction} 
               mode="popLayout"
             >
-              <motion.div
-                key={index}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                onAnimationComplete={() => setIsAnimating(false)}
-                className="absolute inset-0 rounded-2xl bg-surface border border-white/10 overflow-hidden shadow-[0_30px_60px_-12px_rgba(0,0,0,0.7)]"
-                style={{
-                  transformOrigin: "top center",
-                  backfaceVisibility: "hidden",
-                  transformStyle: "preserve-3d"
-                }}
-              >
-                {/* BACKFACE LAYER (Visibility Toggle Only) */}
-                <div 
-                  className="absolute inset-0 bg-[#1A1A1A] -z-10" 
-                  style={{ transform: "rotateX(180deg)", backfaceVisibility: "hidden" }}
-                />
-
-                <div className="relative w-full h-full">
-                  <img
-                    src={projects[index].image}
-                    alt={projects[index].name}
-                    className="w-full h-full object-cover grayscale brightness-50"
+                <motion.div
+                  key={index}
+                  custom={direction}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  onAnimationComplete={() => setIsAnimating(false)}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  onClick={() => navigateToProject(projects[index].id)}
+                  className="absolute inset-0 rounded-2xl bg-surface border border-white/10 overflow-hidden shadow-[0_30px_60px_-12px_rgba(0,0,0,0.7)] cursor-pointer group"
+                  style={{
+                    transformOrigin: "top center",
+                    backfaceVisibility: "hidden",
+                    transformStyle: "preserve-3d"
+                  }}
+                >
+                  {/* BACKFACE LAYER (Visibility Toggle Only) */}
+                  <div 
+                    className="absolute inset-0 bg-[#1A1A1A] -z-10" 
+                    style={{ transform: "rotateX(180deg)", backfaceVisibility: "hidden" }}
                   />
-                  {/* Bend Highlight */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent h-[15%]" />
-                </div>
 
-                {/* Circular "Review" CTA */}
-                <div className="absolute top-8 right-8 z-20">
-                  <a
-                    href="#"
-                    data-hover
-                    className="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-primary/30 text-primary flex items-center justify-center text-center uppercase text-[10px] font-bold leading-none -rotate-12 hover:rotate-0 hover:bg-primary hover:text-white transition-all duration-500 backdrop-blur-md"
-                  >
-                    <span className="p-3">Review<br/>Project<br/>Archival ↘</span>
-                  </a>
-                </div>
+                  <div className="relative w-full h-full">
+                    <motion.img
+                      layoutId={`project-img-${projects[index].id}`}
+                      src={projects[index].image}
+                      alt={projects[index].name}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Bend Highlight */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent h-[15%]" />
+                  </div>
+
+                  {/* Circular "Review" CTA */}
+                  <div className="absolute top-8 right-8 z-20">
+                    <div
+                      data-hover
+                      className="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-primary/30 text-primary flex items-center justify-center text-center uppercase text-[10px] font-bold leading-none -rotate-12 group-hover:rotate-0 group-hover:bg-primary group-hover:text-white transition-all duration-500 backdrop-blur-md"
+                    >
+                      <span className="p-3">Review<br/>Project<br/>Archival ↘</span>
+                    </div>
+                  </div>
 
                 {/* Frosted Info Overlay (Staggered Exit) */}
                 <motion.div 
@@ -181,9 +190,12 @@ export default function Projects() {
                    className="absolute bottom-10 left-10 max-w-sm z-30"
                 >
                   <div className="p-8 bg-white/[0.03] backdrop-blur-[40px] border border-white/10 rounded-2xl rotate-1 shadow-2xl">
-                    <h3 className="text-3xl font-header leading-tight mb-2 tracking-tight">
+                    <motion.h3 
+                      layoutId={`project-title-${projects[index].id}`}
+                      className="text-3xl font-header leading-tight mb-2 tracking-tight"
+                    >
                       {projects[index].name}
-                    </h3>
+                    </motion.h3>
                     <p className="text-[12px] text-muted leading-relaxed font-medium">
                       {projects[index].desc}
                     </p>

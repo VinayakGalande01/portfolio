@@ -133,32 +133,60 @@ export const skills = [
 
 export const projects = [
   {
-    name: "Redefining",
-    desc: "Mobile interface design for high-performance financial systems.",
-    tech: ["UI/UX", "Mobile"],
-    category: "UX / UI",
-    image: "/mockups/project1.png"
+    id: "insightflow",
+    name: "InsightFlow",
+    desc: "Advanced data visualization architecture for real-time neural sentiment analysis.",
+    tech: ["Data Viz", "AI Analytics", "React", "D3.js"],
+    category: "RESEARCH",
+    image: "/mockups/insightflow.png",
+    client: "NeuroMetrics Lab",
+    year: "2024",
+    link: "https://insightflow.ai",
+    overview: "InsightFlow was designed to bridge the gap between complex neural data and actionable laboratory insights. The system processes thousands of concurrent data streams to visualize emotional resonance in real-time.",
+    challenges: "The primary technical hurdle was the latency involved in rendering high-density vector graphs without dropped frames during peak neural activity spikes.",
+    solutions: "We implemented a custom WebGL-based rendering engine that offloads graph calculations to the GPU, maintaining a steady 60FPS even under extreme load."
   },
   {
-    name: "30 Days of Design",
-    desc: "A creative challenge exploring typography and motion physics.",
-    tech: ["Branding", "Motion"],
-    category: "DESIGN",
-    image: "/mockups/project2.png"
+    id: "strategix-ai",
+    name: "Strategix AI",
+    desc: "Predictive accounts planning and strategic resource allocation engine.",
+    tech: ["ML", "Optimization", "Python", "FastAPI"],
+    category: "ENTERPRISE",
+    image: "/mockups/strategix.png",
+    client: "Apex Global",
+    year: "2023",
+    link: "https://strategix.industries",
+    overview: "Strategix AI serves as the cognitive backbone for enterprise resource planning. It utilizes predictive modelling to forecast market shifts and recommend optimal pivot strategies.",
+    challenges: "Integrating legacy ERP data with modern transformer models required a robust ETL pipeline that could handle inconsistent data formats across global branches.",
+    solutions: "We developed an adaptive semantic layer that automatically maps disparate data schemas to a unified tensor format, ensuring 98% accuracy in trend prediction."
   },
   {
-    name: "Resonance",
-    desc: "Experimental audio-visual interface using neural oscillators.",
-    tech: ["AI", "Web Exp"],
-    category: "APP",
-    image: "/mockups/project3.png"
+    id: "dojocore",
+    name: "Dojocore",
+    desc: "Infrastructure layer for scalable decentralized compute and model training.",
+    tech: ["DevOps", "Web3", "Docker", "Go"],
+    category: "SYSTEMS",
+    image: "/mockups/dojocore.png",
+    client: "DeCentra Network",
+    year: "2024",
+    link: "https://dojocore.io",
+    overview: "Dojocore provides the foundational compute power needed for the next generation of decentralized AI applications. It abstracts complex hardware orchestration into a single, fluid API.",
+    challenges: "Coordinating workload distribution across a heterogeneous network of peer nodes while maintaining zero-knowledge proof of computation.",
+    solutions: "A proprietary shard-based scheduling algorithm was implemented, coupled with optimistic verification protocols to ensure high throughput and security."
   },
   {
-    name: "Elevate",
-    desc: "Corporate branding and digital scalability guidelines.",
-    tech: ["Systems", "Identity"],
-    category: "LOGO",
-    image: "/mockups/project4.png"
+    id: "stealth-ai",
+    name: "Stealth AI",
+    desc: "Privacy-first localized LLM deployment for secure laboratory environments.",
+    tech: ["LLM", "Security", "Ollama", "PyTorch"],
+    category: "CYBER",
+    image: "/mockups/stealth.png",
+    client: "Obsidian Defense",
+    year: "2025",
+    link: "https://stealth-sys.internal",
+    overview: "Stealth AI is an air-gapped intelligence solution designed for high-security environments where data leakage is not an option. It brings modern LLM capabilities to isolated hardware.",
+    challenges: "Optimizing multi-billion parameter models to run efficiently on edge hardware with limited VRAM without compromising inference quality.",
+    solutions: "We utilized advanced 4-bit quantization and selective layer offloading techniques to shrink the model footprint by 70% while maintaining performance benchmarks."
   },
 ];
 
