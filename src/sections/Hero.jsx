@@ -4,9 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Hero() {
   const containerRef = useRef();
-  const cursorRef = useRef();
-  const cursorPos = useRef({ x: 0, y: 0 });
-  const targetPos = useRef({ x: 0, y: 0 });
   const [navVisible, setNavVisible] = useState(true);
   const lastScrollY = useRef(0);
 
@@ -26,40 +23,6 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    if (!cursor) return;
-
-    // Track target position
-    const onMouseMove = (e) => {
-      targetPos.current.x = e.clientX;
-      targetPos.current.y = e.clientY;
-    };
-
-    // Lerp-based cursor with inertia (0.1 factor)
-    const lerp = (start, end, factor) => start + (end - start) * factor;
-    let raf;
-    const animate = () => {
-      cursorPos.current.x = lerp(cursorPos.current.x, targetPos.current.x, 0.1);
-      cursorPos.current.y = lerp(cursorPos.current.y, targetPos.current.y, 0.1);
-      gsap.set(cursor, {
-        x: cursorPos.current.x,
-        y: cursorPos.current.y,
-      });
-      raf = requestAnimationFrame(animate);
-    };
-    animate();
-
-    // Cursor hover scale Check for interactive elements
-    const interactiveEls = document.querySelectorAll("a, button, [data-hover]");
-    const onEnter = () => cursor.classList.add("hovering");
-    const onLeave = () => cursor.classList.remove("hovering");
-    interactiveEls.forEach(el => {
-      el.addEventListener("mouseenter", onEnter);
-      el.addEventListener("mouseleave", onLeave);
-    });
-
-    window.addEventListener("mousemove", onMouseMove);
-
     // Scroll reveal via IntersectionObserver
     const revealEls = document.querySelectorAll(".reveal-element");
     const observer = new IntersectionObserver((entries) => {
@@ -92,12 +55,6 @@ export default function Hero() {
     }, containerRef);
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      cancelAnimationFrame(raf);
-      interactiveEls.forEach(el => {
-        el.removeEventListener("mouseenter", onEnter);
-        el.removeEventListener("mouseleave", onLeave);
-      });
       observer.disconnect();
       ctx.revert();
     };
@@ -115,8 +72,7 @@ export default function Hero() {
 
   return (
     <>
-      {/* Custom Cursor */}
-      <div ref={cursorRef} className="custom-cursor hidden md:block" />
+
 
       {/* Sticky Navigation (Hide on scroll down, Show on scroll up) */}
       <AnimatePresence>

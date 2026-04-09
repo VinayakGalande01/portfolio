@@ -1,16 +1,19 @@
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "../data/content";
-import { useEffect } from "react";
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const project = projects.find((p) => p.id === id);
 
+  const [showMore, setShowMore] = useState(false);
+  const otherProjects = projects.filter((p) => p.id !== id);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
 
   if (!project) {
     return (
@@ -154,14 +157,53 @@ export default function ProjectDetail() {
 
       {/* FOOTER CTA */}
       <footer className="border-t border-white/5 py-32 px-6">
-         <div className="max-w-[1600px] mx-auto flex flex-col items-center text-center">
+         <div className="max-w-[1600px] mx-auto flex flex-col items-center">
             <h2 className="text-muted font-mono text-xs uppercase tracking-[0.5em] mb-8">Next Level Architecture</h2>
             <button 
-               onClick={() => navigate("/")}
-               className="text-[clamp(2rem,5vw,4rem)] font-header hover:text-primary transition-colors hover:scale-105 transform duration-500 uppercase tracking-tighter"
+               onClick={() => setShowMore(!showMore)}
+               className="text-[clamp(2rem,5vw,4rem)] font-header hover:text-primary transition-colors hover:scale-105 transform duration-500 uppercase tracking-tighter mb-20 outline-none"
             >
-              View More Archivals ↓
+              View More Archivals {showMore ? "↑" : "↓"}
             </button>
+
+            <AnimatePresence>
+              {showMore && (
+                <motion.div 
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="w-full overflow-hidden"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-20 border-t border-white/5">
+                    {otherProjects.map((p) => (
+                      <motion.div
+                        key={p.id}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        whileHover={{ scale: 1.05 }}
+                        onClick={() => navigate(`/project/${p.id}`)}
+                        className="group cursor-pointer rounded-2xl bg-surface border border-white/10 overflow-hidden shadow-2xl"
+                      >
+                        <div className="relative aspect-[16/10] overflow-hidden">
+                           <img 
+                            src={p.image} 
+                            alt={p.name} 
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                           />
+                           <div className="absolute inset-x-4 bottom-4 z-20">
+                              <span className="text-[10px] font-mono text-primary uppercase tracking-widest mb-1 block">
+                                {p.category}
+                              </span>
+                              <h4 className="text-xl font-header leading-tight">{p.name}</h4>
+                           </div>
+                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
          </div>
       </footer>
     </div>
