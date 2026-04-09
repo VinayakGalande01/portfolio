@@ -85,7 +85,7 @@ export default function Hero() {
             className="nav-sticky px-6 md:px-20 py-5 flex justify-between items-center"
           >
             <a href="#" className="text-lg font-header tracking-tight">
-              VINAYAK
+              VINAYAK.
             </a>
             <div className="hidden md:flex items-center gap-10">
               {["About", "Projects", "Contact"].map((link) => (
