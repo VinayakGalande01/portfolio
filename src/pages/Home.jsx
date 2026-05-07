@@ -2,7 +2,7 @@ import Hero from "../sections/Hero";
 import Journey from "../sections/Journey";
 import Projects from "../sections/Projects";
 import Services from "../sections/Services";
-import Testimonials from "../sections/Testimonials";
+// import Testimonials from "../sections/Testimonials";
 import Contact from "../sections/Contact";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
       <Journey />
       <Projects />
       <Services />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Contact />
     </div>
   );
